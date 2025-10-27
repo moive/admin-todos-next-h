@@ -25,3 +25,4 @@ npx prisma generate
 4. Rename fiel env-template to .env
 
 5. Replace variables environments
+6. Execute the SEED for create database local
