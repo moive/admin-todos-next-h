@@ -1,3 +1,4 @@
+import * as yup from "yup";
 import { PrismaClient } from "@/generated/prisma";
 import { NextResponse, NextRequest } from "next/server";
 
@@ -24,8 +25,20 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(todos);
 }
 
+const postSchema = yup.object({
+  description: yup.string().required(),
+  complete: yup.boolean().optional().default(false),
+});
+
 export async function POST(request: Request) {
-  const body = await request.json();
-  const todo = await prisma.todo.create({ data: body });
-  return NextResponse.json(todo);
+  try {
+    const body = await postSchema.validate(await request.json());
+    const todo = await prisma.todo.create({ data: body });
+    return NextResponse.json(todo);
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Unknown error" }, { status: 400 });
+  }
 }
