@@ -1,5 +1,24 @@
 import Image from "next/image";
 import { SidebarItem } from "./SidebarItem";
+import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from "react-icons/io5";
+
+const menuItems = [
+  {
+    icon: <IoCalendarOutline />,
+    title: "Dashboard",
+    path: "/dashboard",
+  },
+  {
+    icon: <IoCheckboxOutline />,
+    title: "Rest TODOS",
+    path: "/dashboard/rest-todos",
+  },
+  {
+    icon: <IoListOutline />,
+    title: "Server Actions",
+    path: "/dashboard/server-todos",
+  },
+];
 
 export const Sidebar = () => {
   return (
@@ -32,30 +51,9 @@ export const Sidebar = () => {
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8">
-          {/* <li>
-            <Link
-              href="#"
-              aria-label="dashboard"
-              className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
-            >
-              <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current text-cyan-400 dark:fill-slate-600"
-                ></path>
-                <path
-                  d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                  className="fill-current text-cyan-200 group-hover:text-cyan-300"
-                ></path>
-                <path
-                  d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                  className="fill-current group-hover:text-sky-300"
-                ></path>
-              </svg>
-              <span className="-mr-1 font-medium">Dashboard</span>
-            </Link>
-          </li> */}
-          <SidebarItem />
+          {menuItems.map((item) => (
+            <SidebarItem key={item.path} {...item} />
+          ))}
         </ul>
       </div>
 
