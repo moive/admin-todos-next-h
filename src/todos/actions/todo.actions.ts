@@ -15,3 +15,21 @@ export const toggleTodo = async (id: string, complete: boolean): Promise<Todo> =
 
   return updateTodo;
 };
+
+export const addTodo = async (description: string) => {
+  try {
+    const todo = await prisma.todo.create({ data: { description } });
+    revalidatePath("/dashboard/server-todos");
+    return todo;
+  } catch (error) {
+    console.log(error);
+    return {
+      message: "Error todo create",
+    };
+  }
+};
+
+export const deleteCompleted = async (): Promise<void> => {
+  await prisma.todo.deleteMany({ where: { complete: true } });
+  revalidatePath("/dashboard/server-todos");
+};

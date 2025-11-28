@@ -4,7 +4,7 @@ import { Todo } from "@/generated/prisma";
 import { TodoItem } from "./TodoItem";
 
 // import * as api from "@/todos/helpers/todos.helper";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { toggleTodo } from "../actions/todo.actions";
 
 interface ITodosGrid {
@@ -12,7 +12,7 @@ interface ITodosGrid {
 }
 
 export const TodosGrid = ({ todos = [] }: ITodosGrid) => {
-  const router = useRouter();
+  // const router = useRouter();
 
   // const toggleTodo = async (id: string, complete: boolean) => {
   //   const updatedTodo = await api.updateTodo(id, complete);
