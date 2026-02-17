@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { FormEvent, useState } from "react";
-import { IoTrashOutline } from "react-icons/io5";
+import { FormEvent, useState } from 'react';
+import { IoTrashOutline } from 'react-icons/io5';
 
 // import * as api from "../helpers/todos.helper";
 // import { useRouter } from "next/navigation";
-import { addTodo, deleteCompleted } from "../actions/todo.actions";
+import { addTodo, deleteCompleted } from '../actions/todo.actions';
 
 export const NewTodo = () => {
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
 
   // const router = useRouter();
 
@@ -17,7 +17,7 @@ export const NewTodo = () => {
     if (description.trim().length === 0) return;
 
     await addTodo(description);
-    setDescription("");
+    setDescription('');
     // router.refresh();
   };
 

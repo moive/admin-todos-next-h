@@ -1,7 +1,7 @@
-import { PrismaClient, Todo } from "@/generated/prisma";
-import { get } from "http";
-import { NextResponse, NextRequest } from "next/server";
-import * as yup from "yup";
+import { PrismaClient, Todo } from '@/generated/prisma';
+import { get } from 'http';
+import { NextResponse, NextRequest } from 'next/server';
+import * as yup from 'yup';
 
 interface Segments {
   params: Promise<{ id: string }>;
@@ -22,7 +22,10 @@ export async function GET(request: Request, segments: Segments) {
   const todo = await getTodo(id);
 
   if (!todo) {
-    return NextResponse.json({ messsage: `Todo with id: ${id} not found` }, { status: 404 });
+    return NextResponse.json(
+      { messsage: `Todo with id: ${id} not found` },
+      { status: 404 }
+    );
   }
 
   return NextResponse.json(todo);
@@ -39,11 +42,16 @@ export async function PUT(request: Request, segments: Segments) {
   const todo = await getTodo(id);
 
   if (!todo) {
-    return NextResponse.json({ messsage: `Todo with id: ${id} not found` }, { status: 404 });
+    return NextResponse.json(
+      { messsage: `Todo with id: ${id} not found` },
+      { status: 404 }
+    );
   }
 
   try {
-    const { description, complete } = await putSchema.validate(await request.json());
+    const { description, complete } = await putSchema.validate(
+      await request.json()
+    );
 
     const updateTodo = await prisma.todo.update({
       where: { id },

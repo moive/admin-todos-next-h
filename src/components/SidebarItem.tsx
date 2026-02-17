@@ -1,6 +1,6 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+'use client';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface ISiderbarItem {
   icon: React.ReactNode;
@@ -18,8 +18,8 @@ export const SidebarItem = ({ icon, title, path }: ISiderbarItem) => {
           px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group
           ${
             path === pathName
-              ? "relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-linear-to-r from-sky-600 to-cyan-400"
-              : ""
+              ? 'relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-linear-to-r from-sky-600 to-cyan-400'
+              : ''
           }
         `}
       >

@@ -1,13 +1,16 @@
-import { Todo } from "@/generated/prisma";
+import { Todo } from '@/generated/prisma';
 
-export const updateTodo = async (id: string, complete: boolean): Promise<Todo> => {
+export const updateTodo = async (
+  id: string,
+  complete: boolean
+): Promise<Todo> => {
   const body = { complete };
 
   const todo = await fetch(`/api/todos/${id}`, {
-    method: "PUT",
+    method: 'PUT',
     body: JSON.stringify(body),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   }).then((res) => res.json());
   console.log(todo);
@@ -18,10 +21,10 @@ export const createTodo = async (description: string): Promise<Todo> => {
   const body = { description };
 
   const todo = await fetch(`/api/todos/`, {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(body),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   }).then((res) => res.json());
   console.log(todo);
@@ -30,9 +33,9 @@ export const createTodo = async (description: string): Promise<Todo> => {
 
 export const deleteCompletedTodos = async (): Promise<boolean> => {
   await fetch(`/api/todos/`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   }).then((res) => res.json());
   return true;

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Todo } from "@/generated/prisma";
-import { TodoItem } from "./TodoItem";
+import { Todo } from '@/generated/prisma';
+import { TodoItem } from './TodoItem';
 
 // import * as api from "@/todos/helpers/todos.helper";
 // import { useRouter } from "next/navigation";
-import { toggleTodo } from "../actions/todo.actions";
+import { toggleTodo } from '../actions/todo.actions';
 
 interface ITodosGrid {
   todos?: Todo[];

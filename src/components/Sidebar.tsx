@@ -1,22 +1,26 @@
-import Image from "next/image";
-import { SidebarItem } from "./SidebarItem";
-import { IoCalendarOutline, IoCheckboxOutline, IoListOutline } from "react-icons/io5";
+import Image from 'next/image';
+import { SidebarItem } from './SidebarItem';
+import {
+  IoCalendarOutline,
+  IoCheckboxOutline,
+  IoListOutline,
+} from 'react-icons/io5';
 
 const menuItems = [
   {
     icon: <IoCalendarOutline />,
-    title: "Dashboard",
-    path: "/dashboard",
+    title: 'Dashboard',
+    path: '/dashboard',
   },
   {
     icon: <IoCheckboxOutline />,
-    title: "Rest TODOS",
-    path: "/dashboard/rest-todos",
+    title: 'Rest TODOS',
+    path: '/dashboard/rest-todos',
   },
   {
     icon: <IoListOutline />,
-    title: "Server Actions",
-    path: "/dashboard/server-todos",
+    title: 'Server Actions',
+    path: '/dashboard/server-todos',
   },
 ];
 
