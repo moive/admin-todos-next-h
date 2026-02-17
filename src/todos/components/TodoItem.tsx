@@ -1,5 +1,5 @@
 'use client';
-import { useOptimistic } from 'react';
+import { startTransition, useOptimistic } from 'react';
 import { Todo } from '@/generated/prisma';
 
 import styles from './TodoItem.module.css';
@@ -18,6 +18,16 @@ export const TodoItem = ({ todo, toggleTodo }: ITodoItem) => {
       complete: newCompleteValue,
     })
   );
+
+  const onToggleTodo = async () => {
+    try {
+      startTransition(() => toggleTodoOptimistic(!todoOptimistic.complete));
+      await toggleTodo(todoOptimistic.id, !todoOptimistic.complete);
+    } catch (error) {
+      startTransition(() => toggleTodoOptimistic(!todoOptimistic.complete));
+    }
+  };
+
   return (
     <div
       className={todoOptimistic.complete ? styles.todoTodo : styles.todoPending}
@@ -25,7 +35,8 @@ export const TodoItem = ({ todo, toggleTodo }: ITodoItem) => {
       <div className="flex flex-col sm:flex-row justify-start items-center gap-4">
         <div
           onClick={() =>
-            toggleTodo(todoOptimistic.id, !todoOptimistic.complete)
+            // toggleTodo(todoOptimistic.id, !todoOptimistic.complete)
+            onToggleTodo()
           }
           className={`
           flex p-2 rounded-md cursor-pointer
