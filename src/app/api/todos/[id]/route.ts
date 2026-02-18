@@ -1,4 +1,5 @@
-import { PrismaClient, Todo } from '@/generated/prisma';
+import { Todo } from '@/generated/prisma';
+import { prisma } from '@/lib/prisma';
 import { get } from 'http';
 import { NextResponse, NextRequest } from 'next/server';
 import * as yup from 'yup';
@@ -6,8 +7,6 @@ import * as yup from 'yup';
 interface Segments {
   params: Promise<{ id: string }>;
 }
-
-const prisma = new PrismaClient();
 
 const getTodo = async (id: string): Promise<Todo | null> => {
   const todo = await prisma.todo.findFirst({

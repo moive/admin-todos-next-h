@@ -1,8 +1,5 @@
-// import { prisma } from "@/lib/prisma";
+import { prisma } from '@/lib/prisma';
 import { NextResponse, NextRequest } from 'next/server';
-import { PrismaClient } from '@/generated/prisma';
-
-const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   await prisma.todo.deleteMany(); // delete * from todo

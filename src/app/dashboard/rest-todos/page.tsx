@@ -1,8 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { NewTodo, TodosGrid } from '@/todos';
 
-// const prisma = new PrismaClient();
-
 export const metadata = {
   title: 'List Todos',
   description: 'List Todos',
