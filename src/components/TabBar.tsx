@@ -17,7 +17,8 @@ export const TabBar = ({ tabOptions = [1, 2, 3, 4], currentIndex }: Props) => {
 
   return (
     <div
-      className={`grid grid-cols-${tabOptions.length ?? 1} w-full space-x-2 rounded-xl bg-gray-200 p-2`}
+      className={`grid w-full gap-2 rounded-xl bg-gray-200 p-2`}
+      style={{ gridTemplateColumns: `repeat(${tabOptions.length}, 1fr)` }}
     >
       {tabOptions.map((tab) => (
         <div key={tab}>
