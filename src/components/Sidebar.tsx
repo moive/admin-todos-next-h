@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { SidebarItem } from './SidebarItem';
 import {
+  IoBasketOutline,
   IoCalendarOutline,
   IoCheckboxOutline,
   IoCodeWorkingOutline,
@@ -27,6 +28,11 @@ const menuItems = [
     icon: <IoCodeWorkingOutline />,
     title: 'Cookies',
     path: '/dashboard/cookies',
+  },
+  {
+    icon: <IoBasketOutline />,
+    title: 'Products',
+    path: '/dashboard/products',
   },
 ];
 
