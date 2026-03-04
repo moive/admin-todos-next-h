@@ -1,4 +1,22 @@
-export const TopMenu = () => {
+import { cookies } from 'next/headers';
+import { CiShoppingBasket } from 'react-icons/ci';
+
+const getTotalCount = (cart: { [id: string]: number }): number => {
+  let items = 0;
+
+  Object.values(cart).forEach((value) => {
+    items += value as number;
+  });
+
+  return items;
+};
+
+export const TopMenu = async () => {
+  const cookieStore = await cookies();
+  const cart = JSON.parse(cookieStore.get('cart')?.value ?? '{}');
+
+  const totalItems = getTotalCount(cart);
+
   return (
     <div className="sticky border-gray-200 z-10 top-0 h-16 border-b bg-white lg:py-2.5">
       <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
@@ -21,7 +39,7 @@ export const TopMenu = () => {
             />
           </svg>
         </button>
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 justify-end w-full">
           <div hidden className="md:block">
             <div className="relative flex items-center text-gray-400 focus-within:text-cyan-400">
               <span className="absolute left-4 h-6 flex items-center pr-3 border-r border-gray-300">
@@ -62,6 +80,26 @@ export const TopMenu = () => {
               ></path>
             </svg>
           </button>
+          <div className="relative w-64 hidden md:block">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg
+                className="w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
+
+            <input
+              type="text"
+              placeholder="Buscar..."
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-1 focus:ring-gray-500 focus:border-gray-500 transition"
+            />
+          </div>
           <button
             aria-label="chat"
             className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"
@@ -85,14 +123,20 @@ export const TopMenu = () => {
             aria-label="notification"
             className="w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200"
           >
-            <svg
+            {totalItems > 0 && (
+              <span className="absolute top-1 right-3.5 flex items-center justify-center w-7 h-7 p-1 text-xs font-bold text-white bg-red-800 rounded-full">
+                {totalItems}
+              </span>
+            )}
+            <CiShoppingBasket className="m-auto text-gray-600" size={25} />
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 m-auto text-gray-600"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
               <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-            </svg>
+            </svg> */}
           </button>
         </div>
       </div>
