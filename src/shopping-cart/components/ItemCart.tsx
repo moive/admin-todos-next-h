@@ -4,7 +4,7 @@ import type { Product } from '@/data/products';
 import Image from 'next/image';
 
 import { IoAddCircleOutline, IoRemove } from 'react-icons/io5';
-import {} from '../actions/actions';
+import { removeSingleItemFromCart } from '../actions/actions';
 
 import { useRouter } from 'next/navigation';
 
@@ -17,12 +17,12 @@ export const ItemCard = ({ product, quantity }: Props) => {
   const router = useRouter();
 
   function onAddToCart() {
-    //TODO: addProductToCart(product.id);
+    TODO: addProductToCart(product.id);
     router.refresh();
   }
 
   function onRemoveItem() {
-    //TODO: removeSingleItemFromCart(product.id);
+    TODO: removeSingleItemFromCart(product.id);
     router.refresh();
   }
 
@@ -50,9 +50,7 @@ export const ItemCard = ({ product, quantity }: Props) => {
 
         {/* Price and Add to Cart */}
         <div className="flex flex-col items-start justify-between">
-          <span className="text-gray-900 dark:text-white">
-            Cantidad: {quantity}
-          </span>
+          <span className="text-white">Cantidad: {quantity}</span>
           <span className="font-bold text-white">
             Total: ${(product.price * quantity).toFixed(2)}
           </span>
@@ -77,3 +75,6 @@ export const ItemCard = ({ product, quantity }: Props) => {
     </div>
   );
 };
+function addProductToCart(id: string) {
+  throw new Error('Function not implemented.');
+}
