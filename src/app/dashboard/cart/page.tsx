@@ -1,3 +1,4 @@
+import { WidgetItem } from '@/components';
 import { products, type Product } from '@/data/products';
 import { ItemCard } from '@/shopping-cart/components/ItemCart';
 import { cookies } from 'next/headers';
@@ -32,6 +33,11 @@ export default async function CartPage() {
   };
   const productInCart = getProductInCart(cart);
 
+  const totalToPay = productInCart.reduce(
+    (prev, { product, quantity }) => product.price * quantity + prev,
+    0
+  );
+
   return (
     <div>
       <h1>Cart Page</h1>
@@ -41,6 +47,18 @@ export default async function CartPage() {
           {productInCart.map((item) => (
             <ItemCard key={item.product.id} {...item} />
           ))}
+        </div>
+        <div className="flex flex-col w-full sm:w-4/12">
+          <WidgetItem title="Total to pay">
+            <div className="mt-2 flex justify-center gap-4">
+              <h3 className="text-3xl font-bold text-gray-700">
+                ${(totalToPay * 1.15).toFixed(2)}
+              </h3>
+            </div>
+            <span className="font-bold text-center text-gray-500">
+              Income taxes 15%: ${totalToPay * 0.15}
+            </span>
+          </WidgetItem>
         </div>
       </div>
     </div>
