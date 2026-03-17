@@ -26,3 +26,9 @@ npx prisma generate
 
 5. Replace variables environments
 6. Execute the SEED for create database local
+
+## Note: User for default
+
+**user:** test1@test.com
+
+**password:** 123456
