@@ -1,6 +1,8 @@
+import { unstable_cache } from 'next/cache';
+import { getUserSessionServer } from '@/auth/actions/auth-actions';
 import { prisma } from '@/lib/prisma';
 import { NewTodo, TodosGrid } from '@/todos';
-import { unstable_cache } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 // const prisma = new PrismaClient();
 
@@ -9,15 +11,21 @@ export const metadata = {
   description: 'List Todos',
 };
 
-const getTodos = unstable_cache(
-  async () => {
-    return await prisma.todo.findMany({ orderBy: { description: 'asc' } });
-  },
-  ['todos'],
-  { revalidate: 60 }
-);
-
 export default async function RestTodosPage() {
+  const user = await getUserSessionServer();
+  if (!user) redirect('/api/auth/signin');
+
+  const getTodos = unstable_cache(
+    async () => {
+      return await prisma.todo.findMany({
+        where: { userId: user.id },
+        orderBy: { description: 'asc' },
+      });
+    },
+    ['todos', user.id],
+    { revalidate: 60 }
+  );
+
   const todos = await getTodos();
 
   // const todos = await prisma.todo.findMany({ orderBy: { description: 'asc' } });
