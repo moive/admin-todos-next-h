@@ -47,6 +47,7 @@ const menuItems = [
 export const Sidebar = async () => {
   const session = await getServerSession(authOptions);
   const nameUser = session?.user?.name ?? 'Cynthia J. Watts';
+  const userRoles = session?.user?.roles ?? ['client'];
   const avatar: string =
     session?.user?.image ??
     'https://demo.tailadmin.com/src/images/user/owner.jpg';
@@ -76,7 +77,9 @@ export const Sidebar = async () => {
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             {nameUser}
           </h5>
-          <span className="hidden text-gray-400 lg:block">Admin</span>
+          <span className="hidden text-gray-400 lg:block capitalize">
+            {userRoles.join(', ')}
+          </span>
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8">

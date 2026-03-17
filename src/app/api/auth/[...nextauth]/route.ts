@@ -17,7 +17,35 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt',
+  },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      // console.log({ user });
+      return true;
+    },
+    async jwt({ token, user, account, profile }) {
+      const dbUser = await prisma.user.findUnique({
+        where: { email: token.email ?? 'no-email' },
+      });
+
+      if (dbUser?.isActive === false) {
+        throw new Error('User is not active');
+      }
+
+      token.roles = dbUser?.roles ?? ['no-roles'];
+      token.id = dbUser?.id ?? 'no-id';
+      return token;
+    },
+    async session({ session, token, user }) {
+      if (session && session.user) {
+        session.user.roles = token.roles;
+        session.user.id = token.id;
+      }
+      console.log({ token });
+      return session;
+    },
     async redirect({ url, baseUrl }) {
       console.log({ url, baseUrl });
       return `${baseUrl}/dashboard/server-todos`;

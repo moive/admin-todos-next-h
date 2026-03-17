@@ -9,7 +9,7 @@ export default async function DashboardPage() {
   if (!session) redirect('/api/auth/signin');
 
   return (
-    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+    <div className="grid gap-6 grid-cols-1">
       <WidgetItem title="User connected S-Side">
         <div className="text-center">User</div>
         <div className="flex flex-col">
@@ -17,6 +17,7 @@ export default async function DashboardPage() {
           <span>{session.user?.image}</span>
           <span>{session.user?.email}</span>
         </div>
+        <div>{JSON.stringify(session, null, 2)}</div>
       </WidgetItem>
     </div>
   );
